@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class orders {
+public class Orders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
