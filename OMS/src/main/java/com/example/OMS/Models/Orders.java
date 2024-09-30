@@ -19,6 +19,8 @@ public class Orders {
 	private String CustomerName;
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
+	private String pickupLocation;
+	private String deliveryLocation;
 	public Long getId() {
 		return id;
 	}
@@ -49,11 +51,25 @@ public class Orders {
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
+	public String getPickupLocation() {
+		return pickupLocation;
+	}
+	public void setPickupLocation(String pickupLocation) {
+		this.pickupLocation = pickupLocation;
+	}
+	public String getDeliveryLocation() {
+		return deliveryLocation;
+	}
+	public void setDeliveryLocation(String deliveryLocation) {
+		this.deliveryLocation = deliveryLocation;
+	}
 	@Override
 	public String toString() {
-		return "orders [id=" + id + ", product=" + product + ", Quantity=" + Quantity + ", CustomerName=" + CustomerName
-				+ ", status=" + status + "]";
+		return "Orders [id=" + id + ", product=" + product + ", Quantity=" + Quantity + ", CustomerName=" + CustomerName
+				+ ", status=" + status + ", pickupLocation=" + pickupLocation + ", deliveryLocation=" + deliveryLocation
+				+ "]";
 	}
+	
 	
 	
 	
