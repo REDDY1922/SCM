@@ -13,10 +13,9 @@ public class Route {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int distance;
-	private int duration;
-	private String trafficCondition;
-	private String estimatedArrivalTime;
+	private double distance;
+	private String startLocation;
+    private String endLocation;
 	@ManyToOne
 	private List<Shipment> shipments;
 	public int getId() {
@@ -25,29 +24,23 @@ public class Route {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getDistance() {
+	public double getDistance() {
 		return distance;
 	}
-	public void setDistance(int distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}
-	public int getDuration() {
-		return duration;
+	public String getStartLocation() {
+		return startLocation;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setStartLocation(String startLocation) {
+		this.startLocation = startLocation;
 	}
-	public String getTrafficCondition() {
-		return trafficCondition;
+	public String getEndLocation() {
+		return endLocation;
 	}
-	public void setTrafficCondition(String trafficCondition) {
-		this.trafficCondition = trafficCondition;
-	}
-	public String getEstimatedArrivalTime() {
-		return estimatedArrivalTime;
-	}
-	public void setEstimatedArrivalTime(String estimatedArrivalTime) {
-		this.estimatedArrivalTime = estimatedArrivalTime;
+	public void setEndLocation(String endLocation) {
+		this.endLocation = endLocation;
 	}
 	public List<Shipment> getShipments() {
 		return shipments;
@@ -57,10 +50,8 @@ public class Route {
 	}
 	@Override
 	public String toString() {
-		return "Route [id=" + id + ", distance=" + distance + ", duration=" + duration + ", trafficCondition="
-				+ trafficCondition + ", estimatedArrivalTime=" + estimatedArrivalTime + ", shipments=" + shipments
-				+ "]";
+		return "Route [id=" + id + ", distance=" + distance + ", startLocation=" + startLocation + ", endLocation="
+				+ endLocation + ", shipments=" + shipments + "]";
 	}
-	
 	
 }

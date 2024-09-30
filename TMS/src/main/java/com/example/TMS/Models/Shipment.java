@@ -12,10 +12,10 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String orderId;
-	private String productId;
 	private String pickUpLocation;
 	private String deliveryLocation;
 	private String status;//used for tracking delivery status
+	private double distance;//for billing purpose
 	@ManyToOne
 	private Route route;
 	@ManyToOne
@@ -34,12 +34,7 @@ public class Shipment {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getProductId() {
-		return productId;
-	}
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
+	
 	public String getPickUpLocation() {
 		return pickUpLocation;
 	}
@@ -70,12 +65,19 @@ public class Shipment {
 	public void setCarrier(Carrier carrier) {
 		this.carrier = carrier;
 	}
-	
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 	@Override
 	public String toString() {
-		return "Shipment [id=" + id + ", orderId=" + orderId + ", productId=" + productId + ", pickUpLocation="
-				+ pickUpLocation + ", deliveryLocation=" + deliveryLocation + ", status=" + status + ", route=" + route
-				+ ", carrier=" + carrier + "]";
+		return "Shipment [id=" + id + ", orderId=" + orderId + ", pickUpLocation=" + pickUpLocation
+				+ ", deliveryLocation=" + deliveryLocation + ", status=" + status + ", distance=" + distance
+				+ ", route=" + route + ", carrier=" + carrier + "]";
 	}
+	
+	
 
 }
