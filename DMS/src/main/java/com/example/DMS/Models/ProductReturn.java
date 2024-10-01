@@ -14,8 +14,9 @@ public class ProductReturn {
 	private String orderId;
 	private String productName;
 	private String reason;
+	private String status;
 	@ManyToOne
-	private Warehouse warehouse;
+	private Inventory inventory;
 	public int getId() {
 		return id;
 	}
@@ -40,17 +41,24 @@ public class ProductReturn {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public Warehouse getWarehouse() {
-		return warehouse;
+	public String getStatus() {
+		return status;
 	}
-	public void setWarehouse(Warehouse warehouse) {
-		this.warehouse = warehouse;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Inventory getInventory() {
+		return inventory;
+	}
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	@Override
 	public String toString() {
 		return "ProductReturn [id=" + id + ", orderId=" + orderId + ", productName=" + productName + ", reason="
-				+ reason + ", warehouse=" + warehouse + "]";
+				+ reason + ", status=" + status + ", inventory=" + inventory + "]";
 	}
+	
 	
 	
 }

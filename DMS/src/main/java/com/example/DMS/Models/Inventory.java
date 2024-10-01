@@ -7,12 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class InventoryItem {
+public class Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String productName;
-	private int quantity;
+	private int stockLevel;
 	@ManyToOne
 	private Warehouse warehouse;
 	public int getId() {
@@ -27,21 +27,22 @@ public class InventoryItem {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	
 	public Warehouse getWarehouse() {
 		return warehouse;
 	}
 	public void setWarehouse(Warehouse warehouse) {
 		this.warehouse = warehouse;
 	}
+	public int getStockLevel() {
+		return stockLevel;
+	}
+	public void setStockLevel(int stockLevel) {
+		this.stockLevel = stockLevel;
+	}
 	@Override
 	public String toString() {
-		return "InventoryItem [id=" + id + ", productName=" + productName + ", quantity=" + quantity + ", warehouse="
+		return "Inventory [id=" + id + ", productName=" + productName + ", stockLevel=" + stockLevel + ", warehouse="
 				+ warehouse + "]";
 	}
 	
