@@ -16,7 +16,7 @@ public class Carrier {
 	private String name;
 	private String ServieType;
 	@ManyToOne
-	private List<Shipment> shipments;
+	private Shipment shipments;
 	public int getId() {
 		return id;
 	}
@@ -35,10 +35,8 @@ public class Carrier {
 	public void setServieType(String servieType) {
 		ServieType = servieType;
 	}
-	public List<Shipment> getShipments() {
-		return shipments;
-	}
-	public void setShipments(List<Shipment> shipments) {
+	
+	public void setShipments(Shipment shipments) {
 		this.shipments = shipments;
 	}
 	@Override
@@ -46,5 +44,4 @@ public class Carrier {
 		return "Carrier [id=" + id + ", name=" + name + ", ServieType=" + ServieType + ", shipments=" + shipments + "]";
 	}
 	
-
 }

@@ -17,7 +17,7 @@ public class Route {
 	private String startLocation;
     private String endLocation;
 	@ManyToOne
-	private List<Shipment> shipments;
+	private Shipment shipments;
 	public int getId() {
 		return id;
 	}
@@ -42,10 +42,11 @@ public class Route {
 	public void setEndLocation(String endLocation) {
 		this.endLocation = endLocation;
 	}
-	public List<Shipment> getShipments() {
+
+	public Shipment getShipments() {
 		return shipments;
 	}
-	public void setShipments(List<Shipment> shipments) {
+	public void setShipments(Shipment shipments) {
 		this.shipments = shipments;
 	}
 	@Override

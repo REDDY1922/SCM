@@ -68,6 +68,10 @@ public class ProductReturn {
 		return "ProductReturn [id=" + id + ", orderId=" + orderId + ", productName=" + productName + ", reason="
 				+ reason + ", quantity=" + quantity + ", inventory=" + inventory + ", warehouse=" + warehouse + "]";
 	}
+	public void setInventory(Warehouse inventory2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

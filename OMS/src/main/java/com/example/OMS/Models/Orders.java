@@ -69,6 +69,18 @@ public class Orders {
 				+ ", status=" + status + ", pickupLocation=" + pickupLocation + ", deliveryLocation=" + deliveryLocation
 				+ "]";
 	}
+	public Object getProductName() {
+		// TODO Auto-generated method stub
+		return product;
+	}
+	public Long getOrderId() {
+		// TODO Auto-generated method stub
+		return id;
+	}
+	public int getWarehouseId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	

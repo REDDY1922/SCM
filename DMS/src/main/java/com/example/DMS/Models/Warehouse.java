@@ -35,4 +35,13 @@ public class Warehouse {
 		return "Warehouse [id=" + id + ", location=" + location + ", capacity=" + capacity + "]";
 	}
 	
+	public void setStockLevel(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public int getStockLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 }
