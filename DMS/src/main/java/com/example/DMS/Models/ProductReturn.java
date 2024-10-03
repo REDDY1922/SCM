@@ -12,11 +12,12 @@ public class ProductReturn {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String orderId;
-	private String productName;
+	private String product;
 	private String reason;
 	private int quantity;
+	
 	@ManyToOne
-	private Inventory inventory;
+	private Warehouse inventory;
 	@ManyToOne
 	private Warehouse warehouse;
 	public int getId() {
@@ -31,24 +32,17 @@ public class ProductReturn {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getProductName() {
-		return productName;
-	}
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
 	public String getReason() {
 		return reason;
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
-	public Inventory getInventory() {
+	public Warehouse getInventory() {
 		return inventory;
 	}
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
+	public void setInventory(Warehouse inventory2) {
+		this.inventory = inventory2;
 	}
 	
 	public Warehouse getWarehouse() {
@@ -63,12 +57,13 @@ public class ProductReturn {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	@Override
-	public String toString() {
-		return "ProductReturn [id=" + id + ", orderId=" + orderId + ", productName=" + productName + ", reason="
-				+ reason + ", quantity=" + quantity + ", inventory=" + inventory + ", warehouse=" + warehouse + "]";
+	public String getProduct() {
+		return product;
 	}
-	public void setInventory(Warehouse inventory2) {
+	public void setProduct(String product) {
+		this.product = product;
+	}
+	public void setInventory(Inventory inventory2) {
 		// TODO Auto-generated method stub
 		
 	}

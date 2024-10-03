@@ -21,11 +21,11 @@ public class ProductReturnController {
     // Process product return
     @PostMapping
     public ProductReturn processReturn(@RequestParam String orderId,
-                                       @RequestParam String productName,
+                                       @RequestParam String product,
                                        @RequestParam String reason,
-                                       @RequestParam int quantity,
-                                       @RequestParam int warehouseId) {
-        return productReturnService.processReturn(orderId, productName, reason, quantity, warehouseId);
+                                       @RequestParam int quantity
+                                      ) {
+        return productReturnService.processProductReturn(orderId, product, reason, quantity);
     }
 
     // Get all returned products

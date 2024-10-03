@@ -20,6 +20,7 @@ public class InventoryService {
 	    @Autowired
 	    private WarehouseRepository warehouseRepository;
 
+	   
 	    // Add inventory to a specific warehouse
 	    public Inventory addInventoryToWarehouse(int warehouseId, Inventory inventory) {
 	        Warehouse warehouse = warehouseRepository.findById(warehouseId)
@@ -29,8 +30,8 @@ public class InventoryService {
 	    }
 
 	    // Update stock level
-	    public Inventory updateStockLevel(int inventoryId, int stockLevel) {
-	        Inventory inventory = inventoryRepository.findById(inventoryId)
+	    public Inventory updateStockLevel1(String product, int stockLevel) {
+	        Inventory inventory = inventoryRepository.findById(stockLevel)
 	            .orElseThrow(() -> new RuntimeException("Inventory not found"));
 	        inventory.setStockLevel(stockLevel);
 	        return inventoryRepository.save(inventory);
@@ -49,11 +50,21 @@ public class InventoryService {
 	    @KafkaListener(topics = "order-events", groupId = "dms_group", containerFactory = "kafkaListenerContainerFactory")
 	    public void consumeOrderEvent(Orders order) {
 	        System.out.println("Received Order: " + order);
-	        Inventory inventory = inventoryRepository.findByProductName(order.getProductName());
+	        Inventory inventory = inventoryRepository.findByProductName(order.getProduct());
 	        if (inventory != null && inventory.getStockLevel() > 0) {
 	            inventory.setStockLevel(inventory.getStockLevel() - order.getQuantity());
 	            inventoryRepository.save(inventory);
 	        }
 	    }
+		
+		public void updateStockLevel(String product, int quantity) {
+			// TODO Auto-generated method stub
+			
+		}
+		public Inventory updateStockLevel(int inventoryId, int stockLevel) {
+			// TODO Auto-generated method stubS
+			return null;
+		}
+		
 
 }

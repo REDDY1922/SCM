@@ -7,8 +7,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import com.example.DMS.Models.Inventory;
 import com.example.DMS.Models.ProductReturn;
-import com.example.DMS.Models.Warehouse;
 import com.example.DMS.Repositories.InventoryRepository;
 import com.example.DMS.Repositories.ProductReturnRepository;
 import com.example.DMS.Repositories.WarehouseRepository;
@@ -22,56 +22,35 @@ public class ProductReturnService {
 	private WarehouseRepository warehouseRepository;
 	@Autowired
 	private InventoryRepository inventoryRepository;
-	
 	@Autowired
-    private KafkaTemplate<String, ProductReturn> kafkaTemplate;
+	private final KafkaTemplate<String, ProductReturn> kafkaTemplate;
 
     private static final String RETURN_TOPIC = "return-events";
 
-    // Other methods...
+    @Autowired
+    private InventoryService inventoryService;
 
-    public ProductReturn processReturn(String orderId, String productName, String reason, int quantity, int warehouseId) {
-        Warehouse warehouse = warehouseRepository.findById(warehouseId)
-                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
+    ProductReturnService(KafkaTemplate kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }	
 
-        Warehouse inventory = inventoryRepository.findByProductNameAndWarehouse(productName, warehouse)
-                .orElseThrow(() -> new RuntimeException("Product not found in the specified warehouse"));
+	public ProductReturn processProductReturn(String orderId, String product, String reason, int quantity) {
+		// TODO Auto-generated method stub
+		// Step 1: Update inventory to add back the returned products
+        inventoryService.updateStockLevel(product,quantity);
 
-        // Update inventory with the returned quantity
-        inventory.setStockLevel(inventory.getStockLevel() + quantity);
-        inventoryRepository.save(inventory);
+        // Step 2: Create a ProductReturnEvent
+        ProductReturn returnEvent = new ProductReturn();
 
-        // Save the return details
-        ProductReturn productReturn = new ProductReturn();
-        productReturn.setOrderId(orderId);
-        productReturn.setProductName(productName);
-        productReturn.setReason(reason);
-        productReturn.setQuantity(quantity);
-        productReturn.setWarehouse(warehouse);
-        productReturn.setInventory(inventory);
+        // Step 3: Send the return event to Kafka
+        kafkaTemplate.send(RETURN_TOPIC, returnEvent);
 
-        // Send return data to Kafka
-        kafkaTemplate.send(RETURN_TOPIC, productReturn);
-
-        return productReturnRepository.save(productReturn);
-    }
-
-
-
+        // Step 4: Return the event for further processing or confirmation
+        return returnEvent;
+	}
 	public List<ProductReturn> getAllReturns() {
 		// TODO Auto-generated method stub
 		return productReturnRepository.findAll();
-	}
-	 @KafkaListener(topics = "return-events", groupId = "dms_group", containerFactory = "kafkaListenerContainerFactory")
-	    public void consumeReturnEvent(Orders order) {
-	        // Assuming the order includes information about returns
-	        System.out.println("Received return event for order: " + order);
-	        processReturn(order.getOrderId(), order.getProductName(), "Customer Return", order.getQuantity(), order.getWarehouseId());
-	    }
-
-	private void processReturn(Long orderId, Object productName, String reason, int quantity, int warehouseId) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
