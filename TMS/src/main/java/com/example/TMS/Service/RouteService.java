@@ -20,4 +20,11 @@ public class RouteService {
 	        return route;
 	}
 
+	public Route saveRoute(Route optimizedRoute) {
+		// TODO Auto-generated method stub
+		return routeRepository.save(optimizedRoute);
+	}
+
+	
+
 }

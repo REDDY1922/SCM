@@ -16,8 +16,7 @@ public class Route {
 	private double distance;
 	private String startLocation;
     private String endLocation;
-	@ManyToOne
-	private Shipment shipments;
+	
 	public int getId() {
 		return id;
 	}
@@ -43,16 +42,6 @@ public class Route {
 		this.endLocation = endLocation;
 	}
 
-	public Shipment getShipments() {
-		return shipments;
-	}
-	public void setShipments(Shipment shipments) {
-		this.shipments = shipments;
-	}
-	@Override
-	public String toString() {
-		return "Route [id=" + id + ", distance=" + distance + ", startLocation=" + startLocation + ", endLocation="
-				+ endLocation + ", shipments=" + shipments + "]";
-	}
+	
 	
 }

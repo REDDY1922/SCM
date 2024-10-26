@@ -77,10 +77,7 @@ public class Orders {
 		// TODO Auto-generated method stub
 		return id;
 	}
-	public int getWarehouseId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	
 	
 	

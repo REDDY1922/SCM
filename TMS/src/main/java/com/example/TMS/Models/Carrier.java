@@ -1,6 +1,6 @@
 package com.example.TMS.Models;
 
-import java.util.List;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,8 +15,7 @@ public class Carrier {
 	private int id;
 	private String name;
 	private String ServieType;
-	@ManyToOne
-	private Shipment shipments;
+	
 	public int getId() {
 		return id;
 	}
@@ -36,12 +35,6 @@ public class Carrier {
 		ServieType = servieType;
 	}
 	
-	public void setShipments(Shipment shipments) {
-		this.shipments = shipments;
-	}
-	@Override
-	public String toString() {
-		return "Carrier [id=" + id + ", name=" + name + ", ServieType=" + ServieType + ", shipments=" + shipments + "]";
-	}
+	
 	
 }

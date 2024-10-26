@@ -1,6 +1,7 @@
 package com.example.TMS.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,22 +14,18 @@ public class CarrierService {
 	 @Autowired
 	    private CarrierRepository carrierRepository;
 
-	    public Carrier createCarrier(Carrier carrier) {
-	        return carrierRepository.save(carrier);
-	    }
+		    public Carrier createCarrier(Carrier carrier) {
+		        return carrierRepository.save(carrier);
+		    }
 
-	public Carrier findCarrierByName(String carrierName) {
-		// Logic to find carrier by name
-        return carrierRepository.findAll().stream()
-                .filter(carrier -> carrier.getName().equalsIgnoreCase(carrierName))
-                .findFirst()
-                .orElse(null);
+		    public List<Carrier> getAllCarriers() {
+		        return carrierRepository.findAll();
+		    
+}
 
-	}
-
-	public List<Carrier> getAllCarriers() {
-		// TODO Auto-generated method stub
-		return carrierRepository.findAll();
-	}
+			public Carrier findCarrierByName(String name) {
+				// TODO Auto-generated method stub
+				return carrierRepository.findByName(name);
+			}
 
 }

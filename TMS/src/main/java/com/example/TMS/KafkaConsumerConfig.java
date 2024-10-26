@@ -19,27 +19,47 @@ import com.example.OMS.Models.Orders;
 public class KafkaConsumerConfig {
 	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServers;
-	@Bean
-	public ConsumerFactory<String,Orders> consumerFactory() {
-		Map<String,Object> props=new HashMap<>();
-		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
-		props.put(ConsumerConfig.GROUP_ID_CONFIG,"tms_group");
-		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
-		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
-		props.put(JsonDeserializer.TRUSTED_PACKAGES,"*");
-		
-		return new DefaultKafkaConsumerFactory<>(
-				props,
-				new StringDeserializer(),
-				new JsonDeserializer<>(Orders.class,false)
-				);
+//	@Bean
+//	public ConsumerFactory<String,Orders> consumerFactory() {
+//		Map<String,Object> props=new HashMap<>();
+//		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
+//		props.put(ConsumerConfig.GROUP_ID_CONFIG,"tms_group");
+//		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
+//		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
+//		props.put(JsonDeserializer.TRUSTED_PACKAGES,"*");
+//		
+//		return new DefaultKafkaConsumerFactory<>(
+//				props,
+//				new StringDeserializer(),
+//				new JsonDeserializer<>(Orders.class,false)
+//				);
+//	}
+//	@Bean
+//	public ConcurrentKafkaListenerContainerFactory<String, Orders> kafkaListenerContainerFactory() {
+//		ConcurrentKafkaListenerContainerFactory<String, Orders> factory=
+//				new ConcurrentKafkaListenerContainerFactory<>();
+//		factory.setConsumerFactory(consumerFactory());
+//		return factory;
+//		
+//	}
+	
+	    @Bean
+	    public ConsumerFactory<String, Orders> consumerFactory() {
+	        Map<String, Object> configProps = new HashMap<>();
+	        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+	        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "tms_group");
+	        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+	        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+	        configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+	        return new DefaultKafkaConsumerFactory<>(configProps);
+	    }
+
+	    @Bean
+	    public ConcurrentKafkaListenerContainerFactory<String, Orders> kafkaListenerContainerFactory() {
+	        ConcurrentKafkaListenerContainerFactory<String, Orders> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	        factory.setConsumerFactory(consumerFactory());
+	        return factory;
+	    }
 	}
-	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, Orders> kafkaListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<String, Orders> factory=
-				new ConcurrentKafkaListenerContainerFactory<>();
-		factory.setConsumerFactory(consumerFactory());
-		return factory;
-		
-	}
-}
+
+

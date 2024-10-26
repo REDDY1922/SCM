@@ -16,6 +16,7 @@ public class OrdersService {
 	@Autowired
 	private OrdersRepository ordersRepository;
 	@Autowired
+	
 	private KafkaTemplate<String, Orders> kafkaTemplate;
 	 // Declare a logger instance for the OrdersService class
     private static final Logger logger = LoggerFactory.getLogger(OrdersService.class);

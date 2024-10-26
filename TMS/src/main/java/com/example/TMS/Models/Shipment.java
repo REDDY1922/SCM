@@ -1,4 +1,6 @@
 package com.example.TMS.Models;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +14,7 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String orderId;
+
 	private String pickUpLocation;
 	private String deliveryLocation;
 	private String status;//used for tracking delivery status
@@ -62,8 +65,8 @@ public class Shipment {
 	public Carrier getCarrier() {
 		return carrier;
 	}
-	public void setCarrier(Carrier carrier) {
-		this.carrier = carrier;
+	public void setCarrier(Carrier carrier2) {
+		this.carrier = carrier2;
 	}
 	public double getDistance() {
 		return distance;
